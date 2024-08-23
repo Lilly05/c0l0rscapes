@@ -31,11 +31,10 @@ export default {
 }
 
 b-button {
-  width: 50vh;
-  height: 5vh;
+  width: 40vh;
   margin-top: 10px;
   text-align: center;
-  font-size: 20px !important;
+  font-size: 25px !important;
   color: black !important;
 }
 
