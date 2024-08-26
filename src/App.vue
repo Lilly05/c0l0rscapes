@@ -78,7 +78,7 @@ body {
   font-size: 40px;
   position: absolute;
   cursor: pointer;
-  margin-left: 190vh;
+  margin-left: 180vh;
   margin-top: 4vh;
 }
 
