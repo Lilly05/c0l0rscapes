@@ -1,21 +1,21 @@
 <template>
   <div class="wrapper">
-    <div class="box" :style="{ backgroundColor: color }"></div>
+    <div class="box" v-bind:style= "[color === 'rgb(0, 0, 0)' ? {'border' : 'white 1px solid', backgroundColor: color} : {'border': 'none', backgroundColor: color}]"></div>
   </div>
   <div class="slider-container">
     <label for="red" class="red-label">Red </label>
-    <input type="range" id="red" v-model="red" min="0" max="255" @input="updateColor">
+    <input type="range" id="red" min="0" max="255" @input="updateColor" v-model="inputRed">
   </div>
   <div class="slider-container">
     <label for="green" class="green-label">Green </label>
-    <input type="range" id="green" v-model="green" min="0" max="255" @input="updateColor">
+    <input type="range" id="green" min="0" max="255" @input="updateColor" v-model="inputGreen">
   </div>
   <div class="slider-container">
     <label for="blue" class="blue-label">Blue </label>
-    <input type="range" id="blue" v-model="blue" min="0" max="255" @input="updateColor">
+    <input type="range" id="blue" min="0" max="255" @input="updateColor" v-model="inputBlue">
   </div>
   <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="back-icon" @click="back()"/>
-  <FontAwesomeIcon :icon="faCheck()" class="check-icon"/>
+  <FontAwesomeIcon :icon="faCheck()" class="check-icon" @click="checkColor()"/>
 </template>
 
 <script>
@@ -30,12 +30,10 @@ export default {
       green: 0,
       blue: 0,
       color: 'rgb(0, 0, 0)',
+      inputRed: 0,
+      inputGreen: 0,
+      inputBlue: 0,
     };
-  },
-  mounted() {
-    if (this.rgb.length === 3) {
-      this.setColorValues(this.rgb);
-    }
   },
   props: {
     rgb: {
@@ -68,7 +66,18 @@ export default {
     },
     back() {
       this.$router.push('/');
+    },
+    checkColor() {
+      let data = {
+        color: this.color,
+        inputColor: `rgb(${this.inputRed}, ${this.inputGreen}, ${this.inputBlue})`
+      };
+      this.$router.push({
+        name: "result",
+        query: { data: JSON.stringify(data) }
+      });
     }
+
   },
 };
 </script>
@@ -87,7 +96,7 @@ export default {
   margin-top: 100px;
   width: 30vh;
   height: 30vh;
-  background: red;
+  border: white solid 1px;
 }
 
 label {
