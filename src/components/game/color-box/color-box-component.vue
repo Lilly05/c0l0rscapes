@@ -96,7 +96,6 @@ export default {
   margin-top: 100px;
   width: 30vh;
   height: 30vh;
-  border: white solid 1px;
 }
 
 label {

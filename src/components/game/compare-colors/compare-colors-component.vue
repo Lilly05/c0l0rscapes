@@ -13,7 +13,8 @@ export default {
     return {
       data: null,
       color: null,
-      inputColor: null
+      inputColor: null,
+      similarity: null
     };
   },
   mounted() {
@@ -22,12 +23,35 @@ export default {
         this.data = JSON.parse(this.$route.query.data);
         this.color = this.data.color;
         this.inputColor = this.data.inputColor;
-        console.log("Data received from query and parsed:", this.data);
+
+        this.similarity = this.calculateColorSimilarity(this.color, this.inputColor);
+        console.log(this.similarity)
       } catch (e) {
         console.error("Failed to parse data from query:", e);
       }
     } else {
       console.log("No data found in route query");
+    }
+  },
+  methods: {
+    calculateColorSimilarity(rgb1, rgb2) {
+      // Extrahiere die RGB-Werte
+      let rgbArray1 = rgb1.match(/\d+/g).map(Number);
+      let rgbArray2 = rgb2.match(/\d+/g).map(Number);
+
+      const [r1, g1, b1] = rgbArray1;
+      const [r2, g2, b2] = rgbArray2;
+
+      // Berechne den euklidischen Abstand
+      const distance = Math.sqrt(
+          Math.pow(r2 - r1, 2) +
+          Math.pow(g2 - g1, 2) +
+          Math.pow(b2 - b1, 2)
+      );
+
+      // Maximaler Abstand im RGB-Farbraum
+      const maxDistance = Math.sqrt(3 * Math.pow(255, 2));
+      return Math.round((1 - (distance / maxDistance)) * 100);
     }
   }
 }
@@ -42,7 +66,6 @@ export default {
   margin-top: 100px;
   width: 30vh;
   height: 30vh;
-  border: white solid 1px;
 }
 
 .input-box {
@@ -50,6 +73,5 @@ export default {
   width: 30vh;
   height: 30vh;
   margin-left: 500px;
-  border: white solid 1px;
 }
 </style>
