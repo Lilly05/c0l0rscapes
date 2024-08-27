@@ -33,7 +33,7 @@ export default {
     },
 
     login() {
-      alert("Login")
+      this.$router.push('/login');
     }
   },
   components: {
