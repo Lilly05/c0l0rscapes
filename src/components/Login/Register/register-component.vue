@@ -1,29 +1,32 @@
 <template>
   <div class="container">
     <form>
+      <h1>Register</h1>
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" v-model="username">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" v-model="name">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="password">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Repeat password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat password" v-model="repeatPassword">
+        <label for="repeatPassword">Repeat password</label>
+        <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password" v-model="repeatPassword">
       </div>
-      <button type="submit" class="btn btn-primary" @click="login">Back to Login</button>
-      <button type="submit" class="btn btn-primary" @click="register" :disabled="registerIsDisabled">Register</button>
+      <button type="button" class="btn btn-primary" @click="register" :disabled="registerIsDisabled">Register</button>
+      <button type="button" class="btn btn-primary" @click="login">Back to Login</button>
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      username: '',
+      name: '',
       password: '',
       repeatPassword: ''
     }
@@ -32,8 +35,17 @@ export default {
     login() {
       this.$router.push("/login");
     },
-    register() {
-
+    async register() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/user/register', {
+          name: this.name,
+          password: this.password
+        });
+        alert(response.data);
+        this.$router.push('/login');
+      } catch(error) {
+        alert(error);
+      }
     },
   },
   computed: {
@@ -50,5 +62,7 @@ export default {
 </script>
 
 <style>
-
+h1 {
+  color: #DBAFC1;
+}
 </style>

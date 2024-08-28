@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -25,6 +27,7 @@ export default {
         this.inputColor = this.data.inputColor;
 
         this.similarity = this.calculateColorSimilarity(this.color, this.inputColor);
+        this.saveGuess();
         console.log(this.similarity)
       } catch (e) {
         console.error("Failed to parse data from query:", e);
@@ -52,6 +55,17 @@ export default {
       // Maximaler Abstand im RGB-Farbraum
       const maxDistance = Math.sqrt(3 * Math.pow(255, 2));
       return Math.round((1 - (distance / maxDistance)) * 100);
+    },
+    async saveGuess() {
+      try {
+        await axios.post('http://localhost:3000/api/game/saveGuess', {
+          color: this.color,
+          inputColor: this.inputColor,
+          accuracy: this.similarity
+        });
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 }

@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     axios
-        .get('http://localhost:3000/color')
+        .get('http://localhost:3000/api/game/random')
         .then(response => this.rgb = response.data)
   }
 };
