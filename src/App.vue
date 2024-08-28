@@ -17,7 +17,6 @@
     </RouterLink>
       <FontAwesomeIcon :icon="faUser()" class="icon" @click="login()"/>
     <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="check" @click="checkAuth()"/>
-    <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="logout" @click="logout()"/>
   </div>
   <RouterView></RouterView>
 </template>
@@ -26,7 +25,6 @@
 import {faArrowAltCircleLeft, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import AuthService from '@/services/authService';
-import axios from "axios";
 
 export default {
   name: 'App',
@@ -50,16 +48,6 @@ export default {
         alert('Authentication check failed');
       }
     },
-    async logout() {
-      try {
-        const response = await axios.post('http://localhost:3000/api/user/logout', {}, {
-          withCredentials: true
-        });
-        alert(response.data.message);
-      }catch(error) {
-        alert(error.message);
-      }
-    }
   },
   components: {
     FontAwesomeIcon

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form>
-      <h1>Login</h1>
+      <h1 id="login-title">Login</h1>
       <div class="form-group">
         <label for="name">Email address</label>
         <input type="text" class="form-control" id="name" placeholder="Enter name" v-model="name">
@@ -10,14 +10,17 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
       </div>
-      <button type="button" class="btn btn-primary" :disabled="isLoginDisabled" @click="login">Login</button>
-      <button type="button" class="btn btn-primary" @click="switchToRegister">Register</button>
+      <div class="buttons">
+        <b-button type="button" class="btn btn-primary login-button" :disabled="isLoginDisabled" @click="login">Login</b-button>
+        <b-button type="button" class="btn btn-primary login-button" @click="switchToRegister">Register</b-button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import AuthService from "@/services/authService";
 
 export default {
   data() {
@@ -39,8 +42,10 @@ export default {
             {
               withCredentials: true
             });
+        AuthService.setName(response.data.name);
+        AuthService.setUserId(response.data.userId);
         alert(response.data.message);
-        this.$router.push('/login');
+        this.$router.push('/');
       } catch(error) {
         alert(error);
       }
@@ -79,15 +84,31 @@ input {
   margin-bottom: 20px;
 }
 
-button {
+b-button {
   margin-right: 10px;
+  width: 200px;
 }
 
-h1{
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+#login-title{
   font-family: "Matemasie", sans-serif;
   font-style: normal;
   text-align: center;
   color: #AED9E0;
   font-size: 40px;
 }
+
+.login-button {
+  background: #AED9E0;
+  border: none;
+}
+
+.login-button:hover, .login-button:active, .login-button:focus {
+  background: #C3F3C0;
+}
+
 </style>

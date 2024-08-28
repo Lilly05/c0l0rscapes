@@ -14,8 +14,10 @@
         <label for="repeatPassword">Repeat password</label>
         <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password" v-model="repeatPassword">
       </div>
-      <button type="button" class="btn btn-primary" @click="register" :disabled="registerIsDisabled">Register</button>
-      <button type="button" class="btn btn-primary" @click="login">Back to Login</button>
+      <div class="buttons">
+      <b-button type="button" class="btn btn-primary register-button" @click="register" :disabled="registerIsDisabled">Register</b-button>
+      <b-button type="button" class="btn btn-primary register-button" @click="login">Back to Login</b-button>
+      </div>
     </form>
   </div>
 </template>
@@ -64,5 +66,18 @@ export default {
 <style>
 h1 {
   color: #DBAFC1;
+  font-family: "Matemasie", sans-serif;
+  font-style: normal;
+  text-align: center;
+  font-size: 40px;
+}
+
+.register-button {
+  background: #DBAFC1;
+  border: none;
+}
+
+.register-button:hover, .register-button:focus, .register-button:active{
+  background: #C3F3C0;
 }
 </style>
