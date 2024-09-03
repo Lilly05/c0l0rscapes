@@ -14,8 +14,10 @@
     <label for="blue" class="blue-label">Blue </label>
     <input type="range" id="blue" min="0" max="255" @input="updateColor" v-model="inputBlue">
   </div>
-  <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="back-icon" @click="back()"/>
-  <FontAwesomeIcon :icon="faCheck()" class="check-icon" @click="checkColor()"/>
+  <div class="icon-container">
+    <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="back-icon" @click="back()"/>
+    <FontAwesomeIcon :icon="faCheck()" class="check-icon" @click="checkColor()"/>
+  </div>
 </template>
 
 <script>
@@ -82,8 +84,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Matemasie&display=swap');
 
@@ -112,7 +112,7 @@ label {
 }
 
 input {
-  width: 500px;
+  width: 25%;
 }
 
 .red-label {
@@ -131,7 +131,6 @@ input {
 .back-icon {
   color: white;
   cursor: pointer;
-  margin-left: 80vh;
   margin-top: 50px;
   font-size: 40px;
 }
@@ -142,5 +141,30 @@ input {
   margin-left: 28vh;
   margin-top: 50px;
   font-size: 40px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    margin-top: 50px;
+    width: 15vh;
+    height: 15vh;
+  }
+
+  label {
+    font-size: 20px;
+  }
+
+  input {
+    width: 75%;
+  }
+
+  .icon-container {
+    margin-left: 10%;
+  }
 }
 </style>

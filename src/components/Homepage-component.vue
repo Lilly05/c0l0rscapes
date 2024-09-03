@@ -5,9 +5,11 @@
         Start
       </b-button>
     </RouterLink>
-    <b-button class="btn btn-primary analytics-button button" size="lg">
-      Get analytics
-    </b-button>
+    <RouterLink to="/analytics">
+      <b-button class="btn btn-primary analytics-button button" size="lg">
+        Get analytics
+      </b-button>
+    </RouterLink>
   </div>
 </template>
 
@@ -54,4 +56,18 @@ b-button:active {
   border: none !important;
 }
 
+@media screen and (max-width: 600px) {
+  .button {
+    font-size: 20px !important;
+    width: 30vh;
+  }
+
+  .button-container{
+    margin-top: 5vh;
+  }
+
+  b-button {
+    font-size: 10px !important;
+  }
+}
 </style>

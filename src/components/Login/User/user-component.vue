@@ -1,28 +1,29 @@
 <template>
-  <h1>hello {{name}}</h1>
-  <b-button class="btn btn-primary logout-button" @click="logout()">Logout</b-button>
+  <h1 class="logout-title">Hello {{name}}!</h1>
+  <div class="logout-container">
+    <b-button class="btn btn-primary logout-button" @click="logout()">Logout</b-button>
+  </div>
 </template>
-
 <script>
-import AuthService from "@/services/authService";
 import axios from "axios";
 
 export default {
   data() {
     return {
-      name: AuthService.getName(),
+      name: localStorage.getItem('name')
     }
   },
   methods: {
     async logout() {
       try {
-        const response = await axios.post('http://localhost:3000/api/user/logout', {}, {
+         await axios.post('http://localhost:3000/api/user/logout', {}, {
           withCredentials: true
         });
-        alert(response.data.message);
+         localStorage.removeItem('userId');
+         localStorage.removeItem('name');
         this.$router.push('/login');
       }catch(error) {
-        alert(error.message);
+        console.log(error);
       }
     }
   }
@@ -34,5 +35,27 @@ export default {
 .logout-button {
   background: #F07167;
   border: none;
+  justify-content: center;
+  margin: 20px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logout-title{
+  color: #AED9E0;
+  font-size: 35px;
+}
+
+@media screen and (max-width: 600px) {
+  .logout-title{
+    font-size: 25px;
+  }
+
+  .logout-button{
+    font-size: 15px !important;
+  }
 }
 </style>

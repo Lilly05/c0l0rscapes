@@ -16,7 +16,6 @@
     </div>
     </RouterLink>
       <FontAwesomeIcon :icon="faUser()" class="icon" @click="login()"/>
-    <FontAwesomeIcon :icon="faArrowAltCircleLeft()" class="check" @click="checkAuth()"/>
   </div>
   <RouterView></RouterView>
 </template>
@@ -24,7 +23,6 @@
 <script>
 import {faArrowAltCircleLeft, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import AuthService from '@/services/authService';
 
 export default {
   name: 'App',
@@ -38,15 +36,6 @@ export default {
 
     login() {
       this.$router.push('/login');
-    },
-    async checkAuth() {
-      try {
-        const response = await AuthService.isAuthenticated();
-        alert(`Authenticated: ${response}`);
-      } catch (error) {
-        console.error('Authentication check failed:', error);
-        alert('Authentication check failed');
-      }
     },
   },
   components: {
@@ -91,7 +80,7 @@ body {
   font-size: 40px;
   position: absolute;
   cursor: pointer;
-  margin-left: 180vh;
+  margin-left: 75%;
   margin-top: 4vh;
 }
 
@@ -99,15 +88,20 @@ body {
   text-decoration: none;
 }
 
-.check {
-  color: white;
-  font-size: 50px;
-}
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 35px;
+  }
 
-.logout {
-  color: red;
-  font-size: 50px;
-  margin-left: 20px;
+  .title-container{
+    margin-left: -10%;
+  }
+
+  .icon {
+    font-size: 25px;
+    margin-top: 1.5vh;
+    margin-right: 2vh;
+  }
 }
 
 </style>

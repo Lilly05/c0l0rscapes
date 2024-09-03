@@ -20,7 +20,6 @@
 
 <script>
 import axios from "axios";
-import AuthService from "@/services/authService";
 
 export default {
   data() {
@@ -42,12 +41,11 @@ export default {
             {
               withCredentials: true
             });
-        AuthService.setName(response.data.name);
-        AuthService.setUserId(response.data.userId);
-        alert(response.data.message);
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('name', response.data.name);
         this.$router.push('/');
       } catch(error) {
-        alert(error);
+        console.log(error)
       }
     }
   },
@@ -91,7 +89,7 @@ b-button {
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 #login-title{
@@ -109,6 +107,27 @@ b-button {
 
 .login-button:hover, .login-button:active, .login-button:focus {
   background: #C3F3C0;
+}
+
+@media screen and (max-width: 600px) {
+  #login-title{
+    font-size: 25px;
+    margin-top: 10px;
+  }
+
+  input{
+    width: 75% !important;
+    margin-left: 10%;
+  }
+
+  label{
+    margin-left: 10%;
+  }
+
+  .login-button{
+    font-size: 20px !important;
+    width: 50%;
+  }
 }
 
 </style>

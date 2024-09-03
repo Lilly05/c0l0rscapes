@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form>
-      <h1>Register</h1>
+      <h1 class="register-title">Register</h1>
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter name" v-model="name">
@@ -39,14 +39,13 @@ export default {
     },
     async register() {
       try {
-        const response = await axios.post('http://localhost:3000/api/user/register', {
+        await axios.post('http://localhost:3000/api/user/register', {
           name: this.name,
           password: this.password
         });
-        alert(response.data);
         this.$router.push('/login');
       } catch(error) {
-        alert(error);
+        console.log(error)
       }
     },
   },
@@ -79,5 +78,18 @@ h1 {
 
 .register-button:hover, .register-button:focus, .register-button:active{
   background: #C3F3C0;
+}
+
+@media screen and (max-width: 600px) {
+
+  .register-button{
+    font-size: 20px !important;
+    width: 50%;
+  }
+
+  .register-title{
+    margin-top: 10px;
+    font-size: 25px;
+  }
 }
 </style>

@@ -17,22 +17,6 @@ class AuthService {
             return false;
         }
     }
-
-    setName(name) {
-        this.name = name;
-    }
-
-    setUserId(userId) {
-        this.userId = userId;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getUserID() {
-        return this.userId;
-    }
 }
 
 export default new AuthService();

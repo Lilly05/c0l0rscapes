@@ -54,6 +54,9 @@ export default {
 
       // Maximaler Abstand im RGB-Farbraum
       const maxDistance = Math.sqrt(3 * Math.pow(255, 2));
+      if (Math.round((1 - (distance / maxDistance)) * 100) > 100) {
+        return 100;
+      }
       return Math.round((1 - (distance / maxDistance)) * 100);
     },
     async saveGuess() {
@@ -61,7 +64,8 @@ export default {
         await axios.post('http://localhost:3000/api/game/saveGuess', {
           color: this.color,
           inputColor: this.inputColor,
-          accuracy: this.similarity
+          accuracy: this.similarity,
+          userID: localStorage.getItem('userId')
         });
       } catch(error) {
         console.log(error);

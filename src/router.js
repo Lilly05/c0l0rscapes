@@ -6,6 +6,7 @@ import LoginComponent from "@/components/Login/login-component.vue";
 import RegisterComponent from "@/components/Login/Register/register-component.vue";
 import UserComponent from "@/components/Login/User/user-component.vue";
 import AuthService from "@/services/authService";
+import AnalyticsComponent from "@/components/analytics/analytics-component.vue";
 
 const routes = [
     { path: '/', component: HomepageComponent, name: 'home' },
@@ -18,7 +19,8 @@ const routes = [
     },
     { path: '/login', component: LoginComponent, name: 'login'},
     { path: '/register', component: RegisterComponent, name: 'register' },
-    { path: '/user', component: UserComponent, name: 'user'}
+    { path: '/user', component: UserComponent, name: 'user'},
+    { path: '/analytics', component: AnalyticsComponent, name: 'analytics'}
 ];
 
 const router = createRouter({
